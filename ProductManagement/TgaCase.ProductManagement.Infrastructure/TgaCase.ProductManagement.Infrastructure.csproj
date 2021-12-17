@@ -4,4 +4,14 @@
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\TgaCase.SharedKernel\TgaCase.SharedKernel.csproj" />
+      <ProjectReference Include="..\TgaCase.ProductManagement.Domain\TgaCase.ProductManagement.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+    </ItemGroup>
+
 </Project>
