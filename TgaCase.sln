@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apps", "Apps", "{0C127EF8-2074-4F7D-A89B-D009987C77DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgaCase.SharedKernel", "TgaCase.SharedKernel\TgaCase.SharedKernel.csproj", "{0AE7D402-CF5A-4B3D-8A39-0562C20AAC23}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductManagement", "ProductManagement", "{1978E5BE-6BA0-440B-AABD-D8BE9793D684}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgaCase.ProductManagement.Application", "ProductManagement\TgaCase.ProductManagement.Application\TgaCase.ProductManagement.Application.csproj", "{D7DE0BF4-1EAD-484C-BB5A-1E408C8FC644}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgaCase.ProductManagement.Domain", "ProductManagement\TgaCase.ProductManagement.Domain\TgaCase.ProductManagement.Domain.csproj", "{DB1CDBBB-EDE5-4736-9CB3-25D7CD744BD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgaCase.ProductManagement.Infrastructure", "ProductManagement\TgaCase.ProductManagement.Infrastructure\TgaCase.ProductManagement.Infrastructure.csproj", "{6AF161A7-0C9D-49C9-A323-D865F8895E36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TgaCase.ProductManagement.API", "ProductManagement\TgaCase.ProductManagement.API\TgaCase.ProductManagement.API.csproj", "{079735CA-398B-45FD-A110-F269856F6889}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0AE7D402-CF5A-4B3D-8A39-0562C20AAC23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AE7D402-CF5A-4B3D-8A39-0562C20AAC23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AE7D402-CF5A-4B3D-8A39-0562C20AAC23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AE7D402-CF5A-4B3D-8A39-0562C20AAC23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7DE0BF4-1EAD-484C-BB5A-1E408C8FC644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7DE0BF4-1EAD-484C-BB5A-1E408C8FC644}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7DE0BF4-1EAD-484C-BB5A-1E408C8FC644}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7DE0BF4-1EAD-484C-BB5A-1E408C8FC644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB1CDBBB-EDE5-4736-9CB3-25D7CD744BD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB1CDBBB-EDE5-4736-9CB3-25D7CD744BD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB1CDBBB-EDE5-4736-9CB3-25D7CD744BD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB1CDBBB-EDE5-4736-9CB3-25D7CD744BD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AF161A7-0C9D-49C9-A323-D865F8895E36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AF161A7-0C9D-49C9-A323-D865F8895E36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AF161A7-0C9D-49C9-A323-D865F8895E36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AF161A7-0C9D-49C9-A323-D865F8895E36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{079735CA-398B-45FD-A110-F269856F6889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{079735CA-398B-45FD-A110-F269856F6889}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{079735CA-398B-45FD-A110-F269856F6889}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{079735CA-398B-45FD-A110-F269856F6889}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1978E5BE-6BA0-440B-AABD-D8BE9793D684} = {0C127EF8-2074-4F7D-A89B-D009987C77DD}
+		{D7DE0BF4-1EAD-484C-BB5A-1E408C8FC644} = {1978E5BE-6BA0-440B-AABD-D8BE9793D684}
+		{DB1CDBBB-EDE5-4736-9CB3-25D7CD744BD9} = {1978E5BE-6BA0-440B-AABD-D8BE9793D684}
+		{6AF161A7-0C9D-49C9-A323-D865F8895E36} = {1978E5BE-6BA0-440B-AABD-D8BE9793D684}
+		{079735CA-398B-45FD-A110-F269856F6889} = {1978E5BE-6BA0-440B-AABD-D8BE9793D684}
+	EndGlobalSection
+EndGlobal
