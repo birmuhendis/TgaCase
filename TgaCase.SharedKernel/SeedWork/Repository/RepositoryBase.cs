@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
+using Dapper;
+using TgaCase.SharedKernel.Utilities;
 
 namespace TgaCase.SharedKernel.SeedWork.Repository
 {
@@ -30,29 +33,50 @@ namespace TgaCase.SharedKernel.SeedWork.Repository
         {
         }
 
-        public Task<TId> InsertAsync(TEntity input)
+      public async virtual Task<TId> InsertAsync(TEntity input)
         {
-            throw new System.NotImplementedException();
+            var properties = GenericUtil<TEntity>.GetGenericProperties(input);
+            var prm = PostgreSqlFunctionSqlNameGenerateUtil.GetInsertOrUpdateFunctionParameters(properties, true);
+            var sql = $@"select * from ""{SchemaName}"".""ufn_tbl_{typeof(TEntity).Name}_Insert""({prm.FuncParameters})";
+            return await DbConnection.ExecuteScalarAsync<TId>(sql, prm.Parameters,commandType: CommandType.Text, transaction: DbTransaction,
+                commandTimeout: CommandTimeout);
+        }
+        
+        public async virtual Task<bool> UpdateAsync(TEntity input)
+        {
+            var properties = GenericUtil<TEntity>.GetGenericProperties(input);
+            var prm = PostgreSqlFunctionSqlNameGenerateUtil.GetInsertOrUpdateFunctionParameters(properties, false);
+            var sql = $@"select * from ""{SchemaName}"".""ufn_tbl_{typeof(TEntity).Name}_Update""({prm.FuncParameters})";
+            return await DbConnection.ExecuteScalarAsync<bool>(sql, prm.Parameters,commandType: CommandType.Text, transaction: DbTransaction,
+                commandTimeout: CommandTimeout);
+        }
+        
+        public async virtual Task<bool> DeleteAsync(long id)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@id",id);
+            var sql = $@"select * from ""{SchemaName}"".""ufn_tbl_{typeof(TEntity).Name}_Delete""()";
+            var response = await DbConnection.ExecuteScalarAsync<bool>(sql, parameters,
+                commandType: CommandType.Text,transaction: DbTransaction, commandTimeout: CommandTimeout);
+            return  response;        
+        }
+        
+        public async virtual Task<IList<TEntity>> GetAllAsync()
+        {
+            var sql = $@"select * from ""{SchemaName}"".""ufn_tbl_{typeof(TEntity).Name}_GetAll""()";
+            var response = await DbConnection.QueryAsync<TEntity>(sql,
+                transaction: DbTransaction, commandTimeout: CommandTimeout);
+            return  response.ToList();
         }
 
-        public Task<bool> UpdateAsync(TEntity input)
+        public async virtual Task<TEntity> GetByIdAsync(TId id)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<bool> DeleteAsync(long Id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<IList<TEntity>> GetAllAsync()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<TEntity> GetByIdAsync(TId id)
-        {
-            throw new System.NotImplementedException();
+            var parameters = new DynamicParameters();
+            parameters.Add("@id", id, DbType.Int64);
+            var sql = $@"select * from ""{SchemaName}"".""ufn_tbl_{typeof(TEntity).Name}_GetById""(@id)";
+            var response = await DbConnection.QueryFirstOrDefaultAsync<TEntity>(sql, parameters,
+                transaction: DbTransaction, commandTimeout: CommandTimeout);
+            return  response;
         }
     }
 }
