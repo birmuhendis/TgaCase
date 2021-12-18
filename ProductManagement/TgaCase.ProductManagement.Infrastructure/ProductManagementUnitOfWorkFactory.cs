@@ -16,7 +16,7 @@ namespace TgaCase.ProductManagement.Infrastructure
         public UnitOfWork<IProductManagementDbContext> Create()
         {
             var s = _configuration.GetConnectionString("postgresql");
-            return new UnitOfWork<IProductManagementDbContext>(new ProductManagementDbContext(s, _configuration.GetValue<int>("ErpDBCommandTimeout")));
+            return new UnitOfWork<IProductManagementDbContext>(new ProductManagementDbContext(s, _configuration.GetValue<int>("DBCommandTimeout")));
         }
 
         public UnitOfWork<IProductManagementDbContext> Create(bool openConnection, bool startTransaction)

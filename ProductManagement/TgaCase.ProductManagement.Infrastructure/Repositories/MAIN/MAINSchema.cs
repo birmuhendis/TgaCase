@@ -1,5 +1,6 @@
 using System.Data;
 using TgaCase.ProductManagement.Domain.Schemas.MAIN;
+using TgaCase.ProductManagement.Domain.Schemas.MAIN.CategoryAggregates;
 using TgaCase.ProductManagement.Domain.Schemas.MAIN.ProductAggregates;
 using TgaCase.ProductManagement.Infrastructure.Repositories.MAIN.Implementations;
 
@@ -22,5 +23,6 @@ namespace TgaCase.ProductManagement.Infrastructure.Repositories.MAIN
         }
             
         public IProductRepository Product  => new ProductRepository(_connection, _transaction,_schemaName, _commandTimeout);
+        public ICategoryRepository Category => new CategoryRepository(_connection, _transaction,_schemaName, _commandTimeout);
     }
 }

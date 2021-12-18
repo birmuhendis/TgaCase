@@ -6,9 +6,9 @@ using MediatR;
 using TgaCase.ProductManagement.Domain;
 using TgaCase.SharedKernel.SeedWork.Repository;
 
-namespace TgaCase.ProductManagement.Application.Queries.Product.GetAll
+namespace TgaCase.ProductManagement.Application.Queries.Category.GetAll
 {
-    public class QueryHandler : IRequestHandler<Query,IList<ProductGetAllDto>>
+    public class QueryHandler : IRequestHandler<Query,IList<CategoryGetAllDto>>
     {
         private IUnitOfWorkFactory<IProductManagementDbContext> _unitOfWork;
         private IMapper _mapper;
@@ -17,12 +17,12 @@ namespace TgaCase.ProductManagement.Application.Queries.Product.GetAll
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<IList<ProductGetAllDto>> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<IList<CategoryGetAllDto>> Handle(Query request, CancellationToken cancellationToken)
         {
             using (var uow = _unitOfWork.Create(true, false))
             {
-                var products = await uow.Context.MAIN.Product.GetAllAsync();
-                var resp = _mapper.Map<IList<ProductGetAllDto>>(products);
+                var categories = await uow.Context.MAIN.Category.GetAllAsync();
+                var resp = _mapper.Map<IList<CategoryGetAllDto>>(categories);
                 return resp;
             }
         }

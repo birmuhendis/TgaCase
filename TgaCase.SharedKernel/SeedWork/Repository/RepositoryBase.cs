@@ -72,7 +72,7 @@ namespace TgaCase.SharedKernel.SeedWork.Repository
         public async virtual Task<TEntity> GetByIdAsync(TId id)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("@id", id, DbType.Int64);
+            parameters.Add("@id", id, DbType.Int32);
             var sql = $@"select * from ""{SchemaName}"".""ufn_tbl_{typeof(TEntity).Name}_GetById""(@id)";
             var response = await DbConnection.QueryFirstOrDefaultAsync<TEntity>(sql, parameters,
                 transaction: DbTransaction, commandTimeout: CommandTimeout);
