@@ -40,6 +40,10 @@ namespace TgaCase.SharedKernel.Utilities
                     break;
                 case "System.Nullable`1[System.Int32]":
                     return DbType.Int32;
+                case "System.Decimal":
+                    return DbType.Decimal;
+                case "System.DateTime":
+                    return DbType.Date;
                 default:
                     return DbType.String;
             }

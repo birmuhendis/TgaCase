@@ -39,8 +39,8 @@ namespace TgaCase.SharedKernel.SeedWork.Repository
             var properties = GenericUtil<TEntity>.GetGenericProperties(input);
             var prm = PostgreSqlFunctionSqlNameGenerateUtil.GetInsertOrUpdateFunctionParameters(properties, true);
             var prmName = prm.FuncParameters.Replace("@",@"""").Replace(",", @""",") + @""""; // Postgre büyük harfle olduğu için propertylerin başına  ve sonun " eklenmeli
-            var sql = $@"insert into ""{SchemaName}"".""{typeof(TEntity).Name}"" ({prmName}) values({prm.FuncParameters});";
-            var res = await DbConnection.QueryFirstOrDefaultAsync<TId>(sql, prm.Parameters,commandType: CommandType.Text, transaction: DbTransaction, commandTimeout: CommandTimeout);
+            var sql = $@"insert into ""{SchemaName}"".""{typeof(TEntity).Name}"" ({prmName}) values({prm.FuncParameters}) RETURNING ""Id""";
+            var res = await DbConnection.ExecuteScalarAsync<TId>(sql, prm.Parameters,commandType: CommandType.Text, transaction: DbTransaction, commandTimeout: CommandTimeout);
             return res;
         }
         

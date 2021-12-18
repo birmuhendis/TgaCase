@@ -4,6 +4,7 @@ using TgaCase.ProductManagement.Domain.Schemas.MAIN.CategoryAggregates;
 using TgaCase.ProductManagement.Domain.Schemas.MAIN.CommentsAggregates;
 using TgaCase.ProductManagement.Domain.Schemas.MAIN.ProductAggregates;
 using TgaCase.ProductManagement.Domain.Schemas.MAIN.ProductDetailAggregates;
+using TgaCase.ProductManagement.Domain.Schemas.MAIN.ProductImages;
 using TgaCase.ProductManagement.Domain.Schemas.MAIN.RoleAggregates;
 using TgaCase.ProductManagement.Domain.Schemas.MAIN.UserAggregates;
 using TgaCase.ProductManagement.Infrastructure.Repositories.MAIN.Implementations;
@@ -32,5 +33,6 @@ namespace TgaCase.ProductManagement.Infrastructure.Repositories.MAIN
         public IRoleRepository Role => new RoleRepository(_connection, _transaction, _schemaName, _commandTimeout);
         public ICommentsRepository Comments => new CommentsRepository(_connection, _transaction, _schemaName, _commandTimeout);
         public IProductDetailRepository ProductDetail => new ProductDetailRepository(_connection, _transaction, _schemaName, _commandTimeout);
+        public IProductImagesRepository ProductImages => new ProductImagesRepository(_connection, _transaction, _schemaName, _commandTimeout);
     }
 }

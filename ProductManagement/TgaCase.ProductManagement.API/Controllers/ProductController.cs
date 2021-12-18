@@ -14,12 +14,20 @@ namespace TgaCase.ProductManagement.API.Controllers
             _mediatr = mediatr;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] Application.Queries.Product.GetAll.Query query)
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetById([FromRoute] Application.Queries.ProductDetail.GetLastVersionById.Query query)
             => Ok(await _mediatr.Send(query));
         
-        [HttpGet("{Id}")]
-        public async Task<IActionResult> GetById([FromRoute] Application.Queries.Product.GetById.Query query)
+        [HttpGet("category/{CategoryId}")]
+        public async Task<IActionResult> GetByCategoryId([FromRoute] Application.Queries.ProductDetail.GetByCategoryId.Query query)
             => Ok(await _mediatr.Send(query));
+        [HttpPost]
+        public async Task<IActionResult> InsertAsync([FromBody] Application.Commands.ProductDetail.Insert.Command command)
+            => Ok(await _mediatr.Send(command));
+        
+        [HttpPut]
+        public async Task<IActionResult> UpdateAsync([FromBody] Application.Commands.ProductDetail.Update.Command command)
+            => Ok(await _mediatr.Send(command));
+
     }
 }
