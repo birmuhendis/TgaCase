@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TgaCase.SharedKernel.SeedWork.Entity;
 using TgaCase.SharedKernel.SeedWork.Signatures;
@@ -10,5 +11,6 @@ namespace TgaCase.ProductManagement.Domain.Schemas.MAIN.CommentsAggregates
         public string Comment { get; set; }
         public int ProductId { get; set; }
         public int UserId { get; set; }
+        public DateTime Date { get; set; }
     }
 }

@@ -37,15 +37,30 @@ namespace TgaCase.ProductManagement.Application.Commands.ProductDetail.Insert
                             UpdatedDate = DateTime.Now,
                             Version = 1
                         });
-                foreach (var image in request.Images)
+                if (request.Images.Count > 0)
                 {
+                    //gelen resimleri ekle
+                    foreach (var image in request.Images)
+                    {
+                        var img = await uow.Context.MAIN.ProductImages.InsertAsync(
+                            new Domain.Schemas.MAIN.ProductImages.ProductImages
+                            {
+                                Path = image,
+                                ProductId = productInsertedId,
+                            });
+                    }
+                }
+                else
+                {
+                    //hiç resim yoksa default resmi ekle
                     var img = await uow.Context.MAIN.ProductImages.InsertAsync(
                         new Domain.Schemas.MAIN.ProductImages.ProductImages
                         {
-                            Path = image,
+                            Path = "noimg",
                             ProductId = productInsertedId,
                         });
                 }
+
                 uow.CommitTransaction();
                 return true;
             }

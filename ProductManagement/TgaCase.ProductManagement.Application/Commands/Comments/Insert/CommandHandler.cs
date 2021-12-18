@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -5,7 +6,7 @@ using MediatR;
 using TgaCase.ProductManagement.Domain;
 using TgaCase.SharedKernel.SeedWork.Repository;
 
-namespace TgaCase.ProductManagement.Application.Commands.Category.Insert
+namespace TgaCase.ProductManagement.Application.Commands.Comments.Insert
 {
     public class CommandHandler : IRequestHandler<Command,bool>
     {
@@ -19,11 +20,13 @@ namespace TgaCase.ProductManagement.Application.Commands.Category.Insert
         {
             using (var uow = _unitOfWork.Create(true, true))
             {
-                var insert = await uow.Context.MAIN.Category.InsertAsync(new Domain.Schemas.MAIN.CategoryAggregates.Category
+                var insert = await uow.Context.MAIN.Comments.InsertAsync(new Domain.Schemas.MAIN.CommentsAggregates.Comments
                 {
-                    Name =request.Name,
-                    ParentId = request.ParentId,
-                    IsActive = request.IsActive
+                    Title = request.Title,
+                    Comment = request.Comment,
+                    ProductId = request.ProductId,
+                    UserId  = request.UserId,
+                    Date = DateTime.Now
                 });
                 uow.CommitTransaction();
                 return true;
