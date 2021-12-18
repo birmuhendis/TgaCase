@@ -5,7 +5,7 @@ using MediatR;
 using TgaCase.ProductManagement.Domain;
 using TgaCase.SharedKernel.SeedWork.Repository;
 
-namespace TgaCase.ProductManagement.Application.Commands.Category.Insert
+namespace TgaCase.ProductManagement.Application.Commands.Category.Delete
 {
     public class CommandHandler : IRequestHandler<Command,bool>
     {
@@ -19,12 +19,7 @@ namespace TgaCase.ProductManagement.Application.Commands.Category.Insert
         {
             using (var uow = _unitOfWork.Create(true, true))
             {
-                var insert = await uow.Context.MAIN.Category.InsertAsync(new Domain.Schemas.MAIN.CategoryAggregates.Category
-                {
-                    Name =request.Name,
-                    ParentId = request.ParentId,
-                    IsActive = request.IsActive
-                });
+                var delete = await uow.Context.MAIN.Category.DeleteAsync(request.Id);
                 uow.CommitTransaction();
                 return true;
             }

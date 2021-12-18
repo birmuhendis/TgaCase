@@ -1,11 +1,9 @@
 using MediatR;
 
-namespace TgaCase.ProductManagement.Application.Commands.Category.Insert
+namespace TgaCase.ProductManagement.Application.Commands.Category.Delete
 {
     public class Command : IRequest<bool>
     {
-        public string Name { get; set; }
-        public int? ParentId { get; set; }
-        public bool IsActive { get; set; }
+        public int Id { get; set; }
     }
 }

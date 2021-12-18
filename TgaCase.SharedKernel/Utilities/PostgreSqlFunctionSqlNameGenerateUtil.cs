@@ -20,7 +20,7 @@ namespace TgaCase.SharedKernel.Utilities
                 }
                 parameters.Add($"@{property.Name}", property.Value, property.DbType);
                 param += $"@{property.Name}";
-                if (i != properties.Count - 1)
+                if (i != properties.Count - (isInsert ? 2 : 1))
                     param += ",";
                 i++;
             }

@@ -32,6 +32,14 @@ namespace TgaCase.SharedKernel.Utilities
                 case "System.String":
                     return DbType.String;
                 break;
+                case "System.Int32":
+                    return DbType.Int32;
+                    break;
+                case "System.Boolean":
+                    return DbType.Boolean;
+                    break;
+                case "System.Nullable`1[System.Int32]":
+                    return DbType.Int32;
                 default:
                     return DbType.String;
             }

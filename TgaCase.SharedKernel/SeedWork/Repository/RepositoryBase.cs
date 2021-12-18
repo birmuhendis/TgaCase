@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -37,16 +38,32 @@ namespace TgaCase.SharedKernel.SeedWork.Repository
         {
             var properties = GenericUtil<TEntity>.GetGenericProperties(input);
             var prm = PostgreSqlFunctionSqlNameGenerateUtil.GetInsertOrUpdateFunctionParameters(properties, true);
-            var sql = $@"select * from ""{SchemaName}"".""ufn_tbl_{typeof(TEntity).Name}_Insert""({prm.FuncParameters})";
-            return await DbConnection.ExecuteScalarAsync<TId>(sql, prm.Parameters,commandType: CommandType.Text, transaction: DbTransaction,
-                commandTimeout: CommandTimeout);
+            var prmName = prm.FuncParameters.Replace("@",@"""").Replace(",", @""",") + @""""; // Postgre büyük harfle olduğu için propertylerin başına  ve sonun " eklenmeli
+            var sql = $@"insert into ""{SchemaName}"".""{typeof(TEntity).Name}"" ({prmName}) values({prm.FuncParameters});";
+            var res = await DbConnection.QueryFirstOrDefaultAsync<TId>(sql, prm.Parameters,commandType: CommandType.Text, transaction: DbTransaction, commandTimeout: CommandTimeout);
+            return res;
         }
         
         public async virtual Task<bool> UpdateAsync(TEntity input)
         {
             var properties = GenericUtil<TEntity>.GetGenericProperties(input);
             var prm = PostgreSqlFunctionSqlNameGenerateUtil.GetInsertOrUpdateFunctionParameters(properties, false);
-            var sql = $@"select * from ""{SchemaName}"".""ufn_tbl_{typeof(TEntity).Name}_Update""({prm.FuncParameters})";
+            var prmNames = (prm.FuncParameters.Replace("@", @"""").Replace(",", @""",") + @"""").Replace(")",String.Empty).Replace("(",String.Empty);
+            var paramSplit = prmNames.Split(',');
+            string updParams = @"";
+            int i = 0;
+            foreach (var prmm in paramSplit)
+            {
+                if (prmm != @"""Id""")
+                {
+                    updParams += $@"{prmm}= @{prmm.Replace(@"""",String.Empty)}";
+                    updParams += ",";
+                }
+            }
+
+            if (updParams[updParams.Length - 1] == ',')
+                updParams = updParams.Substring(0, updParams.Length - 1);
+            var sql = $@"update ""{SchemaName}"".""{typeof(TEntity).Name}"" set {updParams} where ""Id"" = @Id ";
             return await DbConnection.ExecuteScalarAsync<bool>(sql, prm.Parameters,commandType: CommandType.Text, transaction: DbTransaction,
                 commandTimeout: CommandTimeout);
         }
@@ -55,7 +72,7 @@ namespace TgaCase.SharedKernel.SeedWork.Repository
         {
             var parameters = new DynamicParameters();
             parameters.Add("@id",id);
-            var sql = $@"select * from ""{SchemaName}"".""ufn_tbl_{typeof(TEntity).Name}_Delete""()";
+            var sql = $@"delete from ""{SchemaName}"".""{typeof(TEntity).Name}""where ""Id"" = @id ";
             var response = await DbConnection.ExecuteScalarAsync<bool>(sql, parameters,
                 commandType: CommandType.Text,transaction: DbTransaction, commandTimeout: CommandTimeout);
             return  response;        
@@ -63,7 +80,7 @@ namespace TgaCase.SharedKernel.SeedWork.Repository
         
         public async virtual Task<IList<TEntity>> GetAllAsync()
         {
-            var sql = $@"select * from ""{SchemaName}"".""ufn_tbl_{typeof(TEntity).Name}_GetAll""()";
+            var sql = $@"select * from ""{SchemaName}"".""{typeof(TEntity).Name}""";
             var response = await DbConnection.QueryAsync<TEntity>(sql,
                 transaction: DbTransaction, commandTimeout: CommandTimeout);
             return  response.ToList();
@@ -73,7 +90,7 @@ namespace TgaCase.SharedKernel.SeedWork.Repository
         {
             var parameters = new DynamicParameters();
             parameters.Add("@id", id, DbType.Int32);
-            var sql = $@"select * from ""{SchemaName}"".""ufn_tbl_{typeof(TEntity).Name}_GetById""(@id)";
+            var sql = $@"select * from ""{SchemaName}"".""{typeof(TEntity).Name}"" where ""Id""=@id";
             var response = await DbConnection.QueryFirstOrDefaultAsync<TEntity>(sql, parameters,
                 transaction: DbTransaction, commandTimeout: CommandTimeout);
             return  response;

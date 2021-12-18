@@ -2,11 +2,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using MediatR;
-using TgaCase.ProductManagement.Application.Queries.Category.GetAll;
 using TgaCase.ProductManagement.Domain;
 using TgaCase.SharedKernel.SeedWork.Repository;
 
-namespace TgaCase.ProductManagement.Application.Commands.Insert
+namespace TgaCase.ProductManagement.Application.Commands.Category.Insert
 {
     public class CommandHandler : IRequestHandler<Command,bool>
     {
@@ -20,8 +19,13 @@ namespace TgaCase.ProductManagement.Application.Commands.Insert
         {
             using (var uow = _unitOfWork.Create(true, true))
             {
-                var insertData = _mapper.Map<Domain.Schemas.MAIN.CategoryAggregates.Category>(request);
-                var insert = await uow.Context.MAIN.Category.InsertAsync(insertData);
+                var insert = await uow.Context.MAIN.Category.InsertAsync(new Domain.Schemas.MAIN.CategoryAggregates.Category
+                {
+                    Name =request.Name,
+                    ParentId = request.ParentId,
+                    IsActive = request.IsActive
+                });
+                uow.CommitTransaction();
                 return true;
             }
         }

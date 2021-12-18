@@ -1,6 +1,6 @@
 using AutoMapper;
 
-namespace TgaCase.ProductManagement.Application.Commands.Insert
+namespace TgaCase.ProductManagement.Application.Commands.Category.Insert
 {
     public class Mapper : Profile
     {
