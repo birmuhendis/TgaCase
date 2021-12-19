@@ -14,6 +14,10 @@ namespace TgaCase.ProductManagement.API.Controllers
             _mediatr = mediatr;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAll([FromRoute] Application.Queries.ProductDetail.GetAll.Query query)
+            => Ok(await _mediatr.Send(query));
+        
         [HttpGet("{Id}")]
         public async Task<IActionResult> GetById([FromRoute] Application.Queries.ProductDetail.GetLastVersionById.Query query)
             => Ok(await _mediatr.Send(query));

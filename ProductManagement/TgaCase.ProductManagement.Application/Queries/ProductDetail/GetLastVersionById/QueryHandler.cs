@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -6,6 +7,7 @@ using MediatR;
 using TgaCase.ProductManagement.Domain;
 using TgaCase.SharedKernel.SeedWork.Repository;
 using TgaCase.SharedKernel.Utilities;
+using VaderSharp2;
 
 namespace TgaCase.ProductManagement.Application.Queries.ProductDetail.GetLastVersionById
 {
@@ -29,12 +31,12 @@ namespace TgaCase.ProductManagement.Application.Queries.ProductDetail.GetLastVer
                     var imagesResponse = await uow.Context.MAIN.ProductImages.GetByProductId(request.Id);
                     var commentsResponse = await uow.Context.MAIN.Comments.GetByProductId(request.Id);
                     var images = _mapper.Map<List<ProductImages>>(imagesResponse);
+                    //duygu analizi mapper'da yapılıyor. comment içinde
                     var comment = _mapper.Map<List<Comments>>(commentsResponse);
                     response.Comments = comment.Count > 0 ? comment : new List<Comments>();
                     response.ProductImages = images.Count > 0 ? images : new List<ProductImages>();
                 }
-
-                var x = SentimentAnalysis.Analiysis();
+                
                 return response;
             }
         }

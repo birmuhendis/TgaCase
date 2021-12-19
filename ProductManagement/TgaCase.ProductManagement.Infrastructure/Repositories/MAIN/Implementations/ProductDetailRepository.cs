@@ -59,5 +59,23 @@ namespace TgaCase.ProductManagement.Infrastructure.Repositories.MAIN.Implementat
             var response = await DbConnection.QueryFirstOrDefaultAsync<ProductDetail>(sql, parameters, transaction: DbTransaction, commandTimeout: CommandTimeout);
             return  response;
         }
+
+        public async  Task<IList<ProductDetailGetBtCategoryId>> GetAllForHomeAsync()
+        {
+            var parameters = new DynamicParameters();
+            var sql = $@"select distinct on(p.""Id"") 
+                p.""Id"", p.""Name"" as ""ProductName"", p.""UserId"", u.""Username"", pd.""SalesPrice"",c.""Name"" as ""CategoryName"", pi.""Path"" as   ""ImagePath""
+                from
+               ""MAIN"".""Product"" p 
+                inner join ""MAIN"".""ProductDetail"" pd on pd.""ProductId"" = p.""Id""
+                inner join ""MAIN"".""User"" u on p.""UserId"" = u.""Id""
+                inner join ""MAIN"".""Category"" c on c.""Id"" = p.""CategoryId""
+                left join ""MAIN"".""ProductImages"" pi on pi.""ProductId"" = p.""Id""
+ 
+                order by p.""Id"",pd.""Id""  DESC;
+            ";
+            var response = await DbConnection.QueryAsync<ProductDetailGetBtCategoryId>(sql, parameters, transaction: DbTransaction, commandTimeout: CommandTimeout);
+            return  response.ToList();
+        }
     }
 }

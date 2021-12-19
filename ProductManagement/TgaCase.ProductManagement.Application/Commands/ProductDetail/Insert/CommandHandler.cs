@@ -56,7 +56,7 @@ namespace TgaCase.ProductManagement.Application.Commands.ProductDetail.Insert
                     var img = await uow.Context.MAIN.ProductImages.InsertAsync(
                         new Domain.Schemas.MAIN.ProductImagesAggregates.ProductImages
                         {
-                            Path = "noimg",
+                            Path = "https://pasatizhi.ru/bitrix/templates/universelite_ec/images/noimg/no-img.png",
                             ProductId = productInsertedId,
                         });
                 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using VaderSharp2;
 
 namespace TgaCase.ProductManagement.Application.Queries.ProductDetail.GetLastVersionById
 {
@@ -14,6 +15,7 @@ namespace TgaCase.ProductManagement.Application.Queries.ProductDetail.GetLastVer
         public decimal PurchasePrice { get; set; }
         public DateTime UpdatedDate { get; set; }
         public string CategoryName { get; set; }
+        
         public List<ProductImages> ProductImages { get; set; }
         public List<Comments> Comments { get; set; }
         public ProductLastVersionGetByIdDto()
@@ -33,5 +35,6 @@ namespace TgaCase.ProductManagement.Application.Queries.ProductDetail.GetLastVer
         public int Id { get; set; }
         public string Comment { get; set; }
         public DateTime Date { get; set; }
+        public SentimentAnalysisResults SentimentAnalysis { get; set; }
     }
 }

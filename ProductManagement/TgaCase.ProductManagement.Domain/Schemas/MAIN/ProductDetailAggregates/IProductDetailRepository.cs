@@ -9,5 +9,7 @@ namespace TgaCase.ProductManagement.Domain.Schemas.MAIN.ProductDetailAggregates
         Task<ProductLastVersionDetail> GetLastVersionByIdAsync(int id);
         Task<IList<ProductDetailGetBtCategoryId>> GetByCategoryId(int categoryId);
         Task<ProductDetail> GetByProductId(int productId);
+        Task<IList<ProductDetailGetBtCategoryId>> GetAllForHomeAsync();
+
     }
 }

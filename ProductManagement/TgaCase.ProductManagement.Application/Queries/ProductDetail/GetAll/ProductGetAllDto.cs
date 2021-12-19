@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace TgaCase.ProductManagement.Application.Queries.ProductDetail.GetByCategoryId
+namespace TgaCase.ProductManagement.Application.Queries.ProductDetail.GetAll
 {
-    public class ProductGetByCategoryIdDto
+    public class ProductGetAllDto
     {
         public int Id { get; set; }
         public string ProductName { get; set; }
