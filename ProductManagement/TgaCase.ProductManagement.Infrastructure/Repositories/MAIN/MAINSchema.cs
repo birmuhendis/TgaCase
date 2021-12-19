@@ -4,7 +4,7 @@ using TgaCase.ProductManagement.Domain.Schemas.MAIN.CategoryAggregates;
 using TgaCase.ProductManagement.Domain.Schemas.MAIN.CommentsAggregates;
 using TgaCase.ProductManagement.Domain.Schemas.MAIN.ProductAggregates;
 using TgaCase.ProductManagement.Domain.Schemas.MAIN.ProductDetailAggregates;
-using TgaCase.ProductManagement.Domain.Schemas.MAIN.ProductImages;
+using TgaCase.ProductManagement.Domain.Schemas.MAIN.ProductImagesAggregates;
 using TgaCase.ProductManagement.Domain.Schemas.MAIN.RoleAggregates;
 using TgaCase.ProductManagement.Domain.Schemas.MAIN.UserAggregates;
 using TgaCase.ProductManagement.Infrastructure.Repositories.MAIN.Implementations;

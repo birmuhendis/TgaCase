@@ -43,7 +43,7 @@ namespace TgaCase.ProductManagement.Application.Commands.ProductDetail.Insert
                     foreach (var image in request.Images)
                     {
                         var img = await uow.Context.MAIN.ProductImages.InsertAsync(
-                            new Domain.Schemas.MAIN.ProductImages.ProductImages
+                            new Domain.Schemas.MAIN.ProductImagesAggregates.ProductImages
                             {
                                 Path = image,
                                 ProductId = productInsertedId,
@@ -54,7 +54,7 @@ namespace TgaCase.ProductManagement.Application.Commands.ProductDetail.Insert
                 {
                     //hiç resim yoksa default resmi ekle
                     var img = await uow.Context.MAIN.ProductImages.InsertAsync(
-                        new Domain.Schemas.MAIN.ProductImages.ProductImages
+                        new Domain.Schemas.MAIN.ProductImagesAggregates.ProductImages
                         {
                             Path = "noimg",
                             ProductId = productInsertedId,

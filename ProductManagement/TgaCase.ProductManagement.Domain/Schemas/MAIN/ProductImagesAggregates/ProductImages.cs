@@ -1,7 +1,7 @@
 using TgaCase.SharedKernel.SeedWork.Entity;
 using TgaCase.SharedKernel.SeedWork.Signatures;
 
-namespace TgaCase.ProductManagement.Domain.Schemas.MAIN.ProductImages
+namespace TgaCase.ProductManagement.Domain.Schemas.MAIN.ProductImagesAggregates
 {
     public class ProductImages : BaseEntity, IEntity
     {

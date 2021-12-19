@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using TgaCase.ProductManagement.Domain.Schemas.MAIN.CommentsAggregates;
-using TgaCase.ProductManagement.Domain.Schemas.MAIN.ProductImages;
+using TgaCase.ProductManagement.Domain.Schemas.MAIN.ProductImagesAggregates;
 using TgaCase.SharedKernel.SeedWork.Repository;
 
 namespace TgaCase.ProductManagement.Infrastructure.Repositories.MAIN.Implementations

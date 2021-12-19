@@ -31,12 +31,15 @@ namespace TgaCase.ProductManagement.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             var assemblies = new [] { Assembly.Load("TgaCase.ProductManagement.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null") };
             services.AddMediatR(assemblies);
             services.AddAutoMapper(assemblies);
             services.AddTransient<IUnitOfWorkFactory<IProductManagementDbContext>, ProductManagementUnitOfWorkFactory>();
             
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
@@ -57,6 +60,7 @@ namespace TgaCase.ProductManagement.API
                 app.UseSwaggerUI(c =>
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "TgaCase.ProductManagement.API v1"));
             }
+            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             app.UseHttpsRedirection();
 

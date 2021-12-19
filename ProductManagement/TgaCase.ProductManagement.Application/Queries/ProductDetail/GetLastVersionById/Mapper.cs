@@ -8,7 +8,7 @@ namespace TgaCase.ProductManagement.Application.Queries.ProductDetail.GetLastVer
         {
             CreateMap<Domain.Schemas.MAIN.ProductDetailAggregates.ProductLastVersionDetail, ProductLastVersionGetByIdDto>();
             CreateMap<Domain.Schemas.MAIN.CommentsAggregates.Comments, Comments>();
-            CreateMap<Domain.Schemas.MAIN.ProductImages.ProductImages, ProductImages>();
+            CreateMap<Domain.Schemas.MAIN.ProductImagesAggregates.ProductImages, ProductImages>();
         }
     }
 }

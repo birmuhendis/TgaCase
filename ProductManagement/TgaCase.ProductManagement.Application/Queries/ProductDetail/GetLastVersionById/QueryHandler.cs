@@ -5,6 +5,7 @@ using AutoMapper;
 using MediatR;
 using TgaCase.ProductManagement.Domain;
 using TgaCase.SharedKernel.SeedWork.Repository;
+using TgaCase.SharedKernel.Utilities;
 
 namespace TgaCase.ProductManagement.Application.Queries.ProductDetail.GetLastVersionById
 {
@@ -32,6 +33,8 @@ namespace TgaCase.ProductManagement.Application.Queries.ProductDetail.GetLastVer
                     response.Comments = comment.Count > 0 ? comment : new List<Comments>();
                     response.ProductImages = images.Count > 0 ? images : new List<ProductImages>();
                 }
+
+                var x = SentimentAnalysis.Analiysis();
                 return response;
             }
         }
