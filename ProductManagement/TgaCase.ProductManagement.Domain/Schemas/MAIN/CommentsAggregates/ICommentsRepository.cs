@@ -6,6 +6,6 @@ namespace TgaCase.ProductManagement.Domain.Schemas.MAIN.CommentsAggregates
 {
     public interface ICommentsRepository : IRepository<Comments,int>
     {
-        Task<IList<Comments>> GetByProductId(int productId);
+        Task<IList<CommentDetail>> GetByProductId(int productId);
     }
 }

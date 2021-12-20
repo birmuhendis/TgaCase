@@ -7,6 +7,8 @@ namespace TgaCase.ProductManagement.Application.Commands.Comments.Insert
         public string Title { get; set; }
         public string Comment { get; set; }
         public int ProductId { get; set; }
-        public int UserId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Mail { get; set; }
     }
 }

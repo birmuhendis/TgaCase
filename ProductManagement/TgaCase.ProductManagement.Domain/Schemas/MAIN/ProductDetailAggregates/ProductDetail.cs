@@ -4,7 +4,7 @@ using TgaCase.SharedKernel.SeedWork.Signatures;
 
 namespace TgaCase.ProductManagement.Domain.Schemas.MAIN.ProductDetailAggregates
 {
-    public class ProductDetail :BaseEntity, IEntity
+    public class ProductDetail :BaseEntity, IModel
     {
         public int ProductId { get; set; }
         public decimal SalesPrice { get; set; }

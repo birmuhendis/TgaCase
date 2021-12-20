@@ -19,7 +19,7 @@ namespace TgaCase.ProductManagement.Infrastructure.Repositories.MAIN.Implementat
             var parameters = new DynamicParameters();
             parameters.Add("@id", id, DbType.Int32);
             var sql = $@"select distinct on(p.""Id"") 
-                p.""Id"", p.""Name"" as ""ProductName"", p.""UserId"", u.""Username"", pd.""Quantity"", pd.""SalesPrice"",pd.""PurchasePrice"",pd.""UpdatedDate"",c.""Name"" as ""CategoryName""   
+                p.""Id"", p.""Name"" as ""ProductName"", p.""UserId"", u.""Username"", pd.""Quantity"", pd.""SalesPrice"",pd.""PurchasePrice"",pd.""UpdatedDate"",c.""Name"" as ""CategoryName"", pd.""Detail""   
                 from
                ""MAIN"".""Product"" p 
                 inner join ""MAIN"".""ProductDetail"" pd on pd.""ProductId"" = p.""Id""

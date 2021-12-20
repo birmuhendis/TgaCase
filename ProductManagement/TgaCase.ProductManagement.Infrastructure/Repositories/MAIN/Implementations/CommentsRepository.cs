@@ -15,11 +15,13 @@ namespace TgaCase.ProductManagement.Infrastructure.Repositories.MAIN.Implementat
         {
         }
 
-        public async Task<IList<Comments>> GetByProductId(int productId)
+        public async Task<IList<CommentDetail>> GetByProductId(int productId)
         {            var parameters = new DynamicParameters();
             parameters.Add("@productid", productId, DbType.Int32);
-            var sql = $@"select * from ""MAIN"".""Comments"" where ""ProductId"" = @productid";
-            var response = await DbConnection.QueryAsync<Comments>(sql, parameters, transaction: DbTransaction, commandTimeout: CommandTimeout);
+            var sql = $@"select u.""FirstName"",u.""LastName"", c.""Title"", c.""Comment"", c.""Date"" from ""MAIN"".""Comments"" c
+            inner join ""MAIN"".""User"" u on u.""Id""=c.""UserId"" 
+            where ""ProductId"" = @productid";
+            var response = await DbConnection.QueryAsync<CommentDetail>(sql, parameters, transaction: DbTransaction, commandTimeout: CommandTimeout);
             return  response.ToList();
         }
     }

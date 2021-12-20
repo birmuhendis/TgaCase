@@ -11,7 +11,8 @@ namespace TgaCase.ProductManagement.Application.Queries.ProductDetail.GetLastVer
         public int  UserId { get; set; }
         public string Username { get; set; }
         public int Quantity { get; set; }
-        public decimal SalesPrice { get; set; }
+        public string Detail { get; set; }
+        public string SalesPrice { get; set; }
         public decimal PurchasePrice { get; set; }
         public DateTime UpdatedDate { get; set; }
         public string CategoryName { get; set; }
@@ -32,9 +33,11 @@ namespace TgaCase.ProductManagement.Application.Queries.ProductDetail.GetLastVer
     
     public class Comments
     {
-        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Comment { get; set; }
-        public DateTime Date { get; set; }
+        public string Title { get; set; }
+        public string Date { get; set; }
         public SentimentAnalysisResults SentimentAnalysis { get; set; }
     }
 }

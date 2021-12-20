@@ -20,12 +20,36 @@ namespace TgaCase.ProductManagement.Application.Commands.Comments.Insert
         {
             using (var uow = _unitOfWork.Create(true, true))
             {
+                int userId = 0;
+                var userCheck = await uow.Context.MAIN.User.GetByMail(request.Mail);
+                if (userCheck == null) //maile kayıtlı biri yoksa yeni user oluştur
+                {
+                    var random = new Random();
+                    
+                    var userName = $"user{random.Next(1000)}"; //yorumlar için kullanıcılara random isim oluştur
+                    var newUser = await uow.Context.MAIN.User.InsertAsync(new Domain.Schemas.MAIN.UserAggregates.User
+                    {
+                        FirstName = request.FirstName,
+                        LastName = request.LastName,
+                        Password = "test", // TO DO!! salt ve hash için cryto util yaz!!
+                        Username = userName, 
+                        Salt = "XdsaRsa",
+                        RoleId = 2,
+                        Mail = request.Mail
+                    });
+                    userId = newUser;
+                }
+                else
+                {
+                    userId = userCheck.Id;
+                }
+
                 var insert = await uow.Context.MAIN.Comments.InsertAsync(new Domain.Schemas.MAIN.CommentsAggregates.Comments
                 {
                     Title = request.Title,
                     Comment = request.Comment,
                     ProductId = request.ProductId,
-                    UserId  = request.UserId,
+                    UserId  = userId,
                     Date = DateTime.Now
                 });
                 uow.CommitTransaction();

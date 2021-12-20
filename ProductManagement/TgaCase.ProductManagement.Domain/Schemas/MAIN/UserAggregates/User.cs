@@ -11,5 +11,6 @@ namespace TgaCase.ProductManagement.Domain.Schemas.MAIN.UserAggregates
         public string Password { get; set; }
         public string Salt { get; set; }
         public int RoleId { get; set; }
+        public string Mail { get; set; }
     }
 }

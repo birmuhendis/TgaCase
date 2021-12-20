@@ -14,5 +14,6 @@ namespace TgaCase.ProductManagement.Domain.Schemas.MAIN.ProductDetailAggregates
         public decimal PurchasePrice { get; set; }
         public DateTime UpdatedDate { get; set; }
         public string CategoryName { get; set; }
+        public string Detail { get; set; }
     }
 }
